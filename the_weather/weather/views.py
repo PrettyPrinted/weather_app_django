@@ -19,9 +19,14 @@ def index(request):
     for city in cities:
 
         r = requests.get(url.format(city)).json()
+#        if name doesnt exist it will ignore w/o giving error , though it will be saved in db
+        if r["cod"] == '404':
+            print("City not Found")
+            continue
+
 
         city_weather = {
-            'city' : city.name,
+            'city' : r['name'].title(),   # return  correct name irrespective of the input
             'temperature' : r['main']['temp'],
             'description' : r['weather'][0]['description'],
             'icon' : r['weather'][0]['icon'],
