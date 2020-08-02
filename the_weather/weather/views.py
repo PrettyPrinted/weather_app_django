@@ -1,5 +1,6 @@
 import requests
 from django.shortcuts import render
+from django.http import HttpResponseRedirect
 from .models import City
 from .forms import CityForm
 
@@ -9,6 +10,7 @@ def index(request):
     if request.method == 'POST':
         form = CityForm(request.POST)
         form.save()
+        return HttpResponseRedirect("/")
 
     form = CityForm()
 
