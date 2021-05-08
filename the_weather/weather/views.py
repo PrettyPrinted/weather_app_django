@@ -5,12 +5,13 @@ from .forms import CityForm
 
 def index(request):
     url = 'http://api.openweathermap.org/data/2.5/weather?q={}&units=imperial&appid=YOUR_API_KEY'
+    form = CityForm()
 
     if request.method == 'POST':
         form = CityForm(request.POST)
         form.save()
 
-    form = CityForm()
+    
 
     cities = City.objects.all()
 
